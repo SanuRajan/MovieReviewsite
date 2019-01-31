@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <a class="mr-2" href="#">⭐{{ post.ratings }}/10 </a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+              
+              <br>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }} -{{post.my_genre}}</a></h2>
+            <div>
+              {% if post.my_image %}
+               <img src="{{ post.my_image.url}} ">
+              {% endif %}
+                <p class="article-content"> </p>
+                <p class="article-content">{{ post.content }} -by {{ post.author }} <br> Rated {{ post.ratings }} - by {{ post.author }}</p>
+            </div>
+           
+            
+           
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

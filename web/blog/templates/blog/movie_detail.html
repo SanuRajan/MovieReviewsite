@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">{{ object.author }}</a>
+          <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+            {% if object.author == user %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'movie-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                </div>
+                <div>
+                <p class="article-content"> {{ post.content }} -by {{ post.author }} <br> Rated {{ post.ratings }} - by {{ post.author }} </p>
+                <p class="article-content"> {{ post.co}} </p>
+                
+                <a class="mr-2" href="#">⭐{{ object.ratings }}/10 </a>
+
+                </div>
+            {% endif %}
+            {% if object.author != user %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-other-update' object.id %}">Add your Comments and Ratings</a>
+                    <p class="article-content">{{ object.comments }} -by {{ object.author }} <br> Rated {{ object.ratings }} - by {{ object.comments }} </p>
+               
+                    
+                </div>
+            {% endif %}
+        </div>
+        
+        <p class="article-content"></p>
+
+      </div>
+    </article>
+{% endblock content %}
